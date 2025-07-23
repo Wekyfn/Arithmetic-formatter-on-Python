@@ -1,0 +1,65 @@
+def arithmetic_arranger(problems, show_answers=False):
+
+
+    sanzhar = ''
+    first =''
+    second = ''
+    lines =''
+    result = ''
+
+    if len(problems) > 5:
+
+        return 'Error: Too many problems.'
+
+    for p in problems:
+
+        everything = p.split()
+        number1 = everything[0]
+        operator = everything[1]
+        number2 = everything[2]
+
+        if len(number1) > 4 or len(number2) > 4:
+
+            return 'Error: Numbers cannot be more than four digits.'
+        
+        if operator != '+' and operator != '-':
+
+            return "Error: Operator must be '+' or '-'."
+
+        if not number1.isdigit() or not number2.isdigit():
+
+            return 'Error: Numbers must only contain digits.'
+
+        mayorlen = max(len(number1), len(number2)) + 2
+
+        for _ in range(mayorlen):
+
+            lines+='-'
+        resultofoperation = 0
+
+        if operator == '+':
+
+            resultofoperation = int(number1) + int(number2)
+
+        else:
+
+            resultofoperation = int(number1) - int(number2)
+
+        first += number1.rjust(mayorlen)
+        second += operator + number2.rjust(mayorlen - 1)
+        result += str(resultofoperation).rjust(mayorlen)
+
+        if p != problems[-1]:
+
+            first+='    '
+            second+='    '
+            lines+='    '
+            result+='    '            
+
+    sanzhar = first + '\n' + second + '\n' + lines
+
+    if show_answers:
+
+        sanzhar +='\n' + result
+        
+    return sanzhar
